@@ -1,0 +1,55 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color:rgb(229, 253, 253);
+}
+
+.title{
+  margin: 0 auto;
+  font-size: 35px;
+  text-decoration: none;
+  color:aqua;
+}
+
+.user-admin{
+  display: flex;
+  align-items: center;
+}
+
+.login{
+  margin-right: 10px;
+  color: blue;
+  text-decoration: none;
+}
+
+.form-title{
+  margin-left: 20px;
+}
+
+.registration{
+  color: blue;
+  text-decoration: none;
+}
+
+.registration-form{
+  margin: 10px;
+  border: 1px solid black;
+  background-color: aliceblue;
+  padding: 10px;
+}
+
+.field{
+  margin-bottom: 10px;
+}
+
+.field-form{
+  width: 80%;
+  height: 20px;
+}
+
+.field-area{
+  width: 80%;
+  height: 200px;
+}
