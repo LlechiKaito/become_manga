@@ -18,7 +18,7 @@
         <div class = "user-admin">
           <%if user_signed_in? %>
             <%= link_to current_user.nickname, "#", class: "login" %>
-            <%= link_to "ログアウト", destroy_user_session_path, class: "registration" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "registration" %>
           <% else %>
             <%= link_to "ログイン", new_user_session_path, class: "login" %>
             <%= link_to "新規登録", new_user_registration_path, class: "registration" %>
