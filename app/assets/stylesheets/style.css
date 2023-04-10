@@ -69,3 +69,72 @@
   justify-content: center;
   margin: 20px 0;
 }
+
+.nav_link{
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  width: 10%;
+  height: 10%;
+  background-color:aqua;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.new_link{
+  text-decoration: none;
+}
+
+.form{
+  background-color: rgb(241, 246, 247);
+}
+
+.main-new-form{
+  margin: 20px 0;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+
+.main-label{
+  background-color:rgb(239, 216, 239);
+  width: 100%;
+  display: block;
+  padding: 10px;
+}
+
+.main-form-text{
+  margin: 10px;
+  width: 90%;
+}
+
+.main-form-image{
+  margin: 10px;
+}
+
+.main-form-area{
+  margin: 10px;
+  width: 90%;
+  height: 500px;
+}
+
+.main-form-category{
+  margin: 10px;
+}
+
+.main-submit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  width: 30%;
+  padding: 10px;
+  background-color: rgb(174, 208, 236);
+}
+
+.count{
+  margin: 10px;
+}

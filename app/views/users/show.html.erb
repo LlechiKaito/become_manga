@@ -1,0 +1,24 @@
+<div>
+  <div>
+    <%= current_user.nickname %>
+  </div>
+  <div>
+    <%= current_user.profile %>
+  </div>
+  <div>一覧機能
+    <% @works.each do |work| %>
+      <div><br>
+        <%= work.main_title %><br>
+        <%= work.user.nickname %><br>
+        <%= work.explanation %><br>
+        <%= work.category.name %><br>
+      </div><br>
+    <% end %>
+  </div>
+</div>
+
+<% if current_user.id == @user.id %>
+  <nav class="nav_link">
+    <%= link_to "新規漫画作成", new_work_path(), class: "new_link" %>
+  </nav>
+<% end %>
