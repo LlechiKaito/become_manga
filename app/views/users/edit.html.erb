@@ -1,0 +1,23 @@
+<h2 class = "form-title">ユーザー情報変更</h2>
+
+<%= form_with(model: @user, local: true) do |f| %>
+
+  <div class = "registration-form">
+  
+    <div class="edit-form">
+      <%= f.file_field :image, class: "edit-form-image" %>
+    </div>
+
+    <div class="field">
+      <%= f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", class: "field-form" %>
+    </div>
+
+    <div class="field">
+      <%= f.text_area :profile, autocomplete: "new-password", placeholder: "プロフィール", class: "field-area" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "プロフィール情報変更" %>
+    </div>
+  </div>
+<% end %>
