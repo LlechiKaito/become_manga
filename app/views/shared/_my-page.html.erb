@@ -1,0 +1,15 @@
+<div class="my-page">
+  <div class="my-page-header">
+    <%= content_tag :div, user.nickname, class: "my-page-name" %>
+    <% if user.id == current_user.id %>
+      <%= link_to "編集", edit_user_path(user), class: "my-page-edit" %>
+    <% end %>
+  </div>
+  <% if user.image.attached? %>
+    <%= image_tag(user.image, class: "my-page-image") %>
+  <% else %>
+    <%# ノーイメージを貼る %>
+  <% end %>
+  <h1 class="topic-profile">自己紹介</h1>
+  <%= content_tag :div, user.profile, class: "my-page-profile" %>
+</div>

@@ -1,0 +1,9 @@
+<div>一覧機能
+  <% @works.each do |work| %>
+    <div><br>
+      <%= work.main_title %><br>
+      <%= work.explanation %><br>
+      <%= work.category.name %><br>
+    </div><br>
+  <% end %>
+</div>

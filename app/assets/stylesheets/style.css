@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px ;
+  padding-left: 180px;
   background-color:rgb(229, 253, 253);
 }
 
@@ -70,22 +71,38 @@
   margin: 20px 0;
 }
 
-.nav_link{
-  position: fixed;
-  bottom: 10%;
-  right: 10%;
-  width: 10%;
-  height: 10%;
-  background-color:aqua;
-  color: #fff;
+.new-link{
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  border-radius: 10px;
+  height: 50px;
+  background-color: rgb(183, 251, 251);
+  border: 1px solid rgb(136, 126, 126);
 }
 
-.new_link{
+.new-link-text{
+  border: none;
+  background-color: rgb(183, 251, 251);
   text-decoration: none;
+  color: rgb(0, 189, 189);
+  border-right: 1px solid black;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-link-text-d{
+  border: none;
+  background-color: rgb(183, 251, 251);
+  text-decoration: none;
+  color: rgb(0, 189, 189);
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form{
@@ -137,4 +154,47 @@
 
 .count{
   margin: 10px;
+}
+
+.my-page{
+  padding-bottom: 10%;
+}
+
+.my-page-header{
+  margin: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-page-name{
+  font-size: 30px;
+}
+
+.my-page-edit{
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  border: 1px solid rgb(191, 188, 188);
+  border-radius: 45%;
+  padding: 10px 20px;
+}
+
+.my-page-profile{
+  background-color: rgb(217, 213, 213);
+  padding: 30px;
+}
+
+.my-page-image{
+  height: 200px;
+  width: 50%;
+  display: block;
+  margin: 30px auto;
+}
+
+.topic-profile{
+  margin: 0 30px 10px;
+}
+
+.edit-form{
+  margin-left: 90px;
 }

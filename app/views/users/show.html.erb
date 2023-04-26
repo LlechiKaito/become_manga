@@ -1,24 +1,16 @@
 <div>
+  <div class="new-link">
+    <%= link_to "新規漫画作成", new_work_path(), class: "new-link-text" %>
+    <%= link_to "追加漫画作成", "#", class: "new-link-text" %>
+    <%= link_to "作成済み漫画一覧", "#", class: "new-link-text-d" %>
+  </div>
+  <div class="new-link">
+    <%= link_to "マイプロフィール", "#", class: "new-link-text", id: "my-profile", remote: true %>
+    <%= link_to "ブックマーク一覧", "#", class: "new-link-text-d" %>
+  </div>
+  <%# <div id="my-element">csdcdsc</div> %>
   <div>
-    <%= current_user.nickname %>
+    <%= render partial: 'shared/my-page', locals: { user: @user } %>
   </div>
-  <div>
-    <%= current_user.profile %>
-  </div>
-  <div>一覧機能
-    <% @works.each do |work| %>
-      <div><br>
-        <%= work.main_title %><br>
-        <%= work.user.nickname %><br>
-        <%= work.explanation %><br>
-        <%= work.category.name %><br>
-      </div><br>
-    <% end %>
-  </div>
+  <%#= render partial: 'shared/main-list', locals: { works: @works } %>
 </div>
-
-<% if current_user.id == @user.id %>
-  <nav class="nav_link">
-    <%= link_to "新規漫画作成", new_work_path(), class: "new_link" %>
-  </nav>
-<% end %>
