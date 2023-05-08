@@ -2,6 +2,18 @@ class WorksController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
 
   def index
+    #プルダウンメニューにソート中のカテゴリーを表示するようの変数.初回は値が入っていないので'---'を表示
+    @selected = params[:category_id] || Category.find(1)
+
+    #漫画をソートして@worksに格納.'---'の場合全てを表示.初回用にnil判定.
+    if params[:category_id] == "1" || params[:category_id].nil? 
+      @works = Work.all
+    else  
+      @works = Work.where("category_id = ? ", params[:category_id])
+    end
+
+    #プルダウンにカテゴリー一覧を表示する用の変数.
+    @category = Category.all
   end
 
   def new
