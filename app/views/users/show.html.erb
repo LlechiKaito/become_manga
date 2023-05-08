@@ -2,7 +2,7 @@
   <div class="new-link">
     <%= link_to "新規漫画作成", new_work_path(), class: "new-link-text" %>
     <%= link_to "追加漫画作成", "#", class: "new-link-text" %>
-    <%= link_to "作成済み漫画一覧", "#", class: "new-link-text-d" %>
+    <%= link_to "作成済み漫画一覧", works_path(), class: "new-link-text-d" %>
   </div>
   <div class="new-link">
     <%= link_to "マイプロフィール", "#", class: "new-link-text", id: "my-profile", remote: true %>
