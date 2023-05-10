@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'faker'
 
 RSpec.describe User, type: :model do
   before do
@@ -30,11 +31,11 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
 
-      # it 'emailは@を含まないと登録できない' do
-      #   @user.email = 'testmail'
-      #   @user.valid?
-      #   expect(@user.errors.full_messages).to include('Email is invalid')
-      # end
+      it 'emailは@を含まないと登録できない' do
+        @user.email = 'testmail'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Email is invalid')
+      end
 
       it "passwordが空では登録できない" do
         @user.password = ''
@@ -50,7 +51,7 @@ RSpec.describe User, type: :model do
       end
 
       it 'passwordが129文字以上では登録できない' do
-        @user.password =  Faker::Internet.password(min_length: 129)
+        @user.password =  Faker::Internet.password(min_length: 129, max_length: 130)
         @user.password_confirmation =  @user.password
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')

@@ -185,8 +185,8 @@
 }
 
 .my-page-image{
-  height: 200px;
-  width: 50%;
+  height: 300px;
+  width: auto;
   display: block;
   margin: 30px auto;
 }
@@ -197,4 +197,47 @@
 
 .edit-form{
   margin-left: 90px;
+}
+
+.book-mark-wrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.book-mark-part{
+  width: calc(100% / 3 - 20px); /* 横に3つずつ表示するため、100%を3で割り、さらに間隔を入れるため10pxを引いています */
+  height: auto;
+  margin: 10px;
+}
+
+.book-mark-category{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  color: rgb(93, 92, 92);
+}
+
+.book-mark-image{
+  width: 100%;
+  height: auto;
+}
+
+.book-mark-main-title{
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 10px;
+  font-size: 20px;
+}
+
+.book-mark-user-name{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: rgb(93, 92, 92);
+}
+
+.book-mark-time{
+  display: flex;
+  justify-content: center;
+  color: rgb(93, 92, 92);
 }

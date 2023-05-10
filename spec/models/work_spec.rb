@@ -41,6 +41,11 @@ RSpec.describe Work, type: :model do
         @work.valid?
         expect(@work.errors.full_messages).to include("Category can't be blank")
       end
+      it "userとのアソシエーションがない場合登録できない" do
+        @work.user_id = nil
+        @work.valid?
+        expect(@work.errors.full_messages).to include("User can't be blank")
+      end
     end
   end
 end
