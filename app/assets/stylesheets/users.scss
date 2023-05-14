@@ -1,3 +1,43 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.my-page{
+  padding-bottom: 10%;
+}
+
+.my-page-header{
+  margin: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-page-name{
+  font-size: 30px;
+}
+
+.my-page-edit{
+  text-decoration: none;
+  font-size: 15px;
+  color: black;
+  border: 1px solid rgb(191, 188, 188);
+  border-radius: 45%;
+  padding: 10px 20px;
+}
+
+.my-page-profile{
+  background-color: rgb(217, 213, 213);
+  padding: 30px;
+}
+
+.my-page-image{
+
+  height: 300px;
+  width: auto;
+  display: block;
+  margin: 30px auto;
+}
+
+.topic-profile{
+  margin: 0 30px 10px;
+}
+
+.edit-form{
+  margin-left: 90px;
+}
