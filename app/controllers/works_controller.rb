@@ -6,10 +6,14 @@ class WorksController < ApplicationController
     @selected = params[:category_id] || Category.find(1)
 
     #漫画をソートして@worksに格納.'---'の場合全てを表示.初回用にnil判定.
-    if params[:category_id] == "1" || params[:category_id].nil? 
+    if current_user.nil?
       @works = Work.all
-    else  
-      @works = Work.where("category_id = ? ", params[:category_id])
+    else
+      if params[:category_id] == "1" || params[:category_id].nil? 
+        @works = Work.where("user_id = ? ", current_user.id)
+      else  
+        @works = Work.where("category_id = ? ", params[:category_id]).where("user_id = ? ", current_user.id)
+      end
     end
 
     #プルダウンにカテゴリー一覧を表示する用の変数.
