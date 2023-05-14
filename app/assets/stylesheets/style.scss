@@ -1,3 +1,6 @@
+//bootstrap-import
+@import "bootstrap";
+
 .header{
   display: flex;
   justify-content: space-between;
@@ -197,4 +200,82 @@
 
 .edit-form{
   margin-left: 90px;
+}
+
+/*
+works_index用
+*/
+
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px 0px;
+}
+.box {
+  width: 300px;
+  height: 200px;
+  background-color: #FFFFFF;
+  position: relative;
+}
+.box .textbox {
+  background-color: rgba(191,191,191,0.70);
+  width: 100%;
+  height: 40%;
+  position: absolute;
+  bottom: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.box .img {
+  width: nil;
+  height: 100%;
+  display: block; 
+  margin: auto;
+}
+
+.box .textbox .comic_title {
+  width: 100%;
+  height: 80%;
+  font-size: 150%;
+  margin-left: 2%;
+}
+
+.box .textbox .category {
+  width: 100%;
+  height: 20%;
+  font-size: 70%;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.box_empty {
+width: 300px;
+  height: 0px;
+}
+
+.selecter{
+  display: flex;
+  background-color:rgb(229, 253, 253);
+  align-items: center;
+}	
+
+.selecter .selectbox {
+  -webkit-appearance: none; /*--各ブラウザのCSSを解除--*/
+  -moz-appearance: none;/*--各ブラウザのCSSを解除--*/
+  appearance: none;/*--各ブラウザのCSSを解除--*/
+margin: 1em 0;
+  padding: .8em 1em;
+  font-size: 16px;
+  border-radius: 30px;
+  border: solid 2px #ccc;
+  background-repeat: no-repeat;
+  background-size: 180px 10px;
+  background-position: right 20px center;
+  background-color: #fff;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
