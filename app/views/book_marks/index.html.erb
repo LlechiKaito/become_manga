@@ -1,0 +1,13 @@
+<%# 横に三つずつ表示されるようになってます。 %>
+<div class="book-mark-wrap">
+  <% @works.each do |work| %>
+    <div class="book-mark-part">
+      <%= content_tag :div, work.category.name + "マンガ", class: "book-mark-category" %>
+      <%= image_tag(work.image, class: "book-mark-image") %>
+      <%= content_tag :div, work.main_title, class: "book-mark-main-title" %>
+      <%= content_tag :div, work.user.nickname, class: "book-mark-user-name" %>
+      <%# 作成した日時を表示してます。更新ではないことに注意 %>
+      <%= content_tag :div, work.created_at.strftime('%Y/%m/%d'), class: "book-mark-time" %>
+    </div>
+  <% end %>
+</div>

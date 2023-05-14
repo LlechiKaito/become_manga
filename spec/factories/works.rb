@@ -4,7 +4,7 @@ FactoryBot.define do
     explanation           {Faker::Lorem.characters(number: 50)}
     category_id           {Faker::Number.between(from: 2, to: 7)}
 
-    association :user
+    user { FactoryBot.create(:user) }
 
     after(:build) do |item|
       item.image.attach(io: File.open('public/images/test_image.jpeg'), filename: 'test_image.jpeg')

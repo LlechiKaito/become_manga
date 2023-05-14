@@ -6,6 +6,7 @@
     <% end %>
   </div>
   <% if user.image.attached? %>
+    <%# ここのcss変更しました。違和感がないように %>
     <%= image_tag(user.image, class: "my-page-image") %>
   <% else %>
     <%# ノーイメージを貼る %>
