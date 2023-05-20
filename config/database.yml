@@ -6,7 +6,7 @@ development:
   <<: *default
   adapter: mysql2
   username: root
-  password: "0420"
+  password: 
   host: localhost
   database: become_manga_development
 
@@ -14,7 +14,7 @@ test:
   <<: *default
   adapter: mysql2
   username: root
-  password: "0420"
+  password: 
   host: localhost 
   database: become_manga_test
 
