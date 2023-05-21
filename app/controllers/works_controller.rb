@@ -7,12 +7,12 @@ class WorksController < ApplicationController
 
     #漫画をソートして@worksに格納.'---'の場合全てを表示.初回用にnil判定.
     if current_user.nil?
-      @works = Work.all
+      @works = Work.page(params[:page])
     else
       if params[:category_id] == "1" || params[:category_id].nil? 
-        @works = Work.where("user_id = ? ", current_user.id)
+        @works = Work.where("user_id = ? ", current_user.id).page(params[:page])
       else  
-        @works = Work.where("category_id = ? ", params[:category_id]).where("user_id = ? ", current_user.id)
+        @works = Work.where("category_id = ? ", params[:category_id]).where("user_id = ? ", current_user.id).page(params[:page])
       end
     end
 

@@ -15,7 +15,10 @@ class BookMarksController < ApplicationController
     @bookmark = BookMark.new(user_id: current_user[:id], work_id: params[:id])
     # saveが成功したら知らせが出る backは、createを申請したページに再読み込みして戻ります。
     if @bookmark.save
-      redirect_to :back, notice: "Bookmark was successfully created."
+      #エラーが出た、redirect_to :backは非推奨らしい
+      #下に変更したらエラー解消、俺の実装が悪い可能性有り
+      #redirect_to :back, notice: "Bookmark was successfully created."
+      redirect_back(fallback_location: root_path)
     # saveが失敗したら警告が出る
     else
       redirect_to :back, alert: "Error occurred while bookmarking."
