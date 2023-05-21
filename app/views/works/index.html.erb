@@ -30,8 +30,12 @@
                     </div>
                     
                     <div class="card-footer mt-auto position-relative">
-                        <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
-                            <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク
+                        <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
+                            <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
+                                <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク</button>
+                            <% end %>
+                        <% else %>
+                            <%# ここに頼む %>
                         <% end %>
                     </div>
                 </div>
