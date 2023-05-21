@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :works
   has_many :works, through: :book_marks
   has_many :book_marks
+  has_many :read_counts, dependent: :destroy
 
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
