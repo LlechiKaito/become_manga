@@ -6,4 +6,11 @@ Rails.application.routes.draw do
   resources :comics, only: [:index]
   
   resources :book_marks, only: [:index, :create, :destroy]
+
+  # ネストさせる
+  resources :users do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end
 end

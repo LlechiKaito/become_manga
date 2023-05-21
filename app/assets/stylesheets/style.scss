@@ -1,13 +1,17 @@
 //bootstrap-import
 @import "bootstrap";
 
+body{
+  background-color: rgb(243, 241, 241);
+}
+
 .header{
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px ;
   padding-left: 180px;
-  background-color:rgb(229, 253, 253);
+  background-color:white;
 }
 
 .title{
