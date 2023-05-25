@@ -77,3 +77,5 @@ gem 'turbo-rails'
 gem 'stimulus-rails'
 
 gem 'kaminari'
+
+gem 'rails_12factor', group: :production
