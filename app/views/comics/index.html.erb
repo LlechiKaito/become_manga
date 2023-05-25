@@ -1,1 +1,7 @@
-<%= @work.main_title %>
+<%= @work.main_title %><br>
+<% @comics.each do |comic| %>
+  <%= comic.subtitle %><br>
+  <%= comic.explanation %><br>
+  <%= image_tag comic.images[0] %><br>
+<% end %>
+<%= link_to "新規漫画作成", new_work_comic_path(@work) %>

@@ -6,6 +6,10 @@ class Comic < ApplicationRecord
 
   has_many :read_counts, dependent: :destroy
 
+  validates :images, presence: true
+
+  validates :images, length: { minimum: 1, maximum: 50, message: "は1枚以上50枚以下にしてください" }
+
     # @comic = Comic.find(params[:id])
     # # unlessは、ifの逆です。見つからなかったら実行、つまり一人１カウントって意味です。
     # unless ReadCount.find_by(user_id: current_user.id, comic_id: @comic.id)

@@ -1,0 +1,28 @@
+<div class="form">
+  <div class="main-new-form">新巻作成</div>
+
+  <%= form_with(model: [@work, @comic], id: "new_post", local: true) do |form| %>
+    <div class="main-form">
+      <%= form.label :"サブタイトル (100文字以内で入力)", class: "main-label" %>
+      <%= form.text_field :subtitle, class: "main-form-text", id: "main-text" %>
+    </div>
+    <div classs="main-form">
+      <%= form.label :"説明文 (70000文字以内で入力)", class: "main-label" %>
+      <%= form.text_area :explanation, class: "main-form-area", id: "main-area" %>
+    </div>
+    <div class="count", id="title-count">タイトル文字数 : 0字</div>
+    <div class="count", id="explanation-count">説明文文字数 : 0字</div>
+    <div class="main-form">
+      <div class="main-file">
+        <%= form.label :"新巻絵(下スクロール)", class: "main-label" %>
+        <div id="previews"></div>
+        <div class="main-form-image">
+          <%= form.file_field :images, name: "comic[images][]", data: {index: 0} %>
+        </div>
+      </div>
+    </div>
+    <div class="main-form">
+      <%= form.submit "新規保存", class: "main-submit" %>
+    </div>
+  <% end %>
+</div>

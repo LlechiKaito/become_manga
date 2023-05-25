@@ -20,7 +20,7 @@
             <div class="col">
                 <div class="card">
                     <div class='position-relative'>
-                    <%= link_to comics_path(id: work.id), class: 'stretched-link' do %>
+                    <%= link_to work_comics_path(work_id: work.id), class: 'stretched-link' do %>
                     <%= image_tag(work.image, class: "card-img object-fit-contain", style: "height:262px;") %>
                     <% end %>
                     </div>
@@ -30,13 +30,15 @@
                     </div>
                     
                     <div class="card-footer mt-auto position-relative">
-                        <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
-                            <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
-                                <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
-                            <% end %>
-                        <% else %>
-                            <%= link_to book_mark_path(work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
-                                <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+                        <% if user_signed_in? %>
+                            <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
+                                <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
+                                    <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
+                                <% end %>
+                            <% else %>
+                                <%= link_to book_mark_path(work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
+                                    <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+                                <% end %>
                             <% end %>
                         <% end %>
                     </div>
