@@ -1,31 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>BecomeManga</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>BecomeManga</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <header>
-      <div class = "header">
-        <div class = "title">
-          <%= link_to "漫画家になろう", root_path, class: "title" %>
-        </div>
-        <div class = "user-admin">
-          <%if user_signed_in? %>
-            <%= link_to "マイページ", user_path(current_user), class: "login" %>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "registration" %>
-          <% else %>
-            <%= link_to "ログイン", new_user_session_path, class: "login" %>
-            <%= link_to "新規登録", new_user_registration_path, class: "registration" %>
-          <% end %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body style="padding-top:4.4rem">
+  <header> 
+    <nav class="navbar bg-body-tertiary fixed-top">
+      <div class="container-fluid">
+        <%= link_to "漫画家になろう", root_path, class: "navber-brand title" %>
+        <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+          aria-expanded="false" aria-controls="offcanvasNavbar" aria-label="ナビゲーションの切替">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">オフキャンバス</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="閉じる"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <div class="user-admin nav-link">
+                  <%if user_signed_in? %>
+                  <%= link_to "マイページ", user_path(current_user), class: "login" %>
+                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "registration" %>
+                  <% else %>
+                  <%= link_to "ログイン", new_user_session_path, class: "login" %>
+                  <%= link_to "新規登録", new_user_registration_path, class: "registration" %>
+                  <% end %>
+                </div>
+              </li>
+              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <%= link_to "新規漫画作成", new_work_path(), class: "nav-link" %>
+              </li>
+              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <%= link_to "作成済み漫画一覧", works_path(), class: "nav-link" %>
+              </li>
+              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <%= link_to "追加漫画作成", "#", class: "nav-link" %>
+              </li>
+              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <%= link_to "マイプロフィール", "#", class: "nav-link", id: "my-profile", remote: true %>
+              </li>
+              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <%= link_to "ブックマーク一覧", book_marks_path(), class: "nav-link" %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </header>
+    </nav>
     <%= yield %>
-  </body>
+</body>
+
 </html>
