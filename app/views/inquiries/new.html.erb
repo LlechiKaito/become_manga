@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+    <div class="main-new-form col-11">お問い合わせ</div>
+
+    <%= form_with(model: @inquiry, class: 'col-11', local: true) do |form| %>
+    <div class="main-form mb-3 row">
+        <div class='col-12'>
+            <%= form.label :"問い合わせ内容 (100文字以内で入力)", class: "form-label" %>
+        </div>
+        <div class='col-12'>
+            <%= form.text_area :inquiry, class: "form-control", rows:5 %>
+        </div>
+        <div class='col-12'>
+            <%= form.submit "送信する", class: "btn btn-primary" %>
+        </div>
+    </div>
+    <% end %>

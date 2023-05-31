@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   
   resources :book_marks, only: [:index, :create, :destroy]
 
+  resources :inquiries, only: [:new, :create]
+
   # ネストさせる
   resources :users do
     resource :relationships, only: [:create, :destroy]

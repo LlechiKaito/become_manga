@@ -52,11 +52,15 @@
               <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <%= link_to "ブックマーク一覧", book_marks_path(), class: "nav-link" %>
               </li>
+              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <%= link_to "お問い合わせ", new_inquiry_path(), class: "nav-link" %>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </nav>
+    </header>
     <%= yield %>
 </body>
 
