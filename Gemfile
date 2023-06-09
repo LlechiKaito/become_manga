@@ -61,9 +61,9 @@ gem 'devise'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 
-# group :production do
-#   gem 'pg'
-# end
+group :production do
+  gem 'pg'
+end
 
 gem 'active_hash'
 gem 'pry', '0.14.1'  # pryを追加
@@ -77,3 +77,5 @@ gem 'stimulus-rails'
 gem 'kaminari'
 
 gem 'rails_12factor', group: :production
+
+gem "dotenv-rails"
