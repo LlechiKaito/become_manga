@@ -70,8 +70,6 @@ gem 'pry', '0.14.1'  # pryを追加
 
 gem 'psych', '~> 3.1'
 
-gem 'bootstrap', '~> 5.3.0.alpha3'
-
 gem 'turbo-rails'
 
 gem 'stimulus-rails'

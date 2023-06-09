@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_23_142023) do
+ActiveRecord::Schema.define(version: 2023_05_30_081232) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(version: 2023_05_23_142023) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "explanation"
     t.index ["work_id"], name: "index_comics_on_work_id"
+  end
+
+  create_table "inquiries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "inquiry", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
 
   create_table "read_counts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -95,6 +103,7 @@ ActiveRecord::Schema.define(version: 2023_05_23_142023) do
   add_foreign_key "book_marks", "users"
   add_foreign_key "book_marks", "works"
   add_foreign_key "comics", "works"
+  add_foreign_key "inquiries", "users"
   add_foreign_key "read_counts", "comics"
   add_foreign_key "read_counts", "users"
   add_foreign_key "works", "users"
