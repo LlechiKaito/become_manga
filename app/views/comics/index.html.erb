@@ -1,7 +1,15 @@
-<%= @work.main_title %><br>
-<% @comics.each do |comic| %>
-  <%= comic.subtitle %><br>
-  <%= comic.explanation %><br>
-  <%= image_tag comic.images[0] %><br>
-<% end %>
+<div class="comic-index-body">
+  <div class="comic-main">
+    <%= image_tag @work.image, class: "comic-main-image" %>
+    <%= content_tag :h1, @work.main_title, class: "comic-main-title" %>
+    <%= content_tag :div, @work.user.nickname, class: "comic-nickname" %>
+    <%= content_tag :div, @work.explanation, class: "comic-explanation" %>
+  </div>
+  <% @comics.each_with_index do |comic, i| %>
+    <%= link_to root_path, class: "comic-part" do %>
+      <%= image_tag comic.images[0], class: "comic-image" %>
+      <%= "[第" + (i + 1).to_s + "話]" + comic.subtitle %>
+    <% end %>
+  <% end %>
+</div>
 <%= link_to "新規漫画作成", new_work_comic_path(@work) %>

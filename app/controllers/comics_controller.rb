@@ -2,6 +2,7 @@ class ComicsController < ApplicationController
     def index
         @comics = Comic.includes(:work).where(work_id: params[:work_id])
         @work = Work.find(params[:work_id])
+        sequence = 1.step
     end
 
     def new
