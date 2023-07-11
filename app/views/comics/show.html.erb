@@ -1,10 +1,38 @@
 <div class="comic-show-desktop">
-  <% (@comic.images.size() / 2).round.times do |index| %>
-    <div class="spread-image">
-      <%= image_tag @comic.images[index * 2 + 1], class: "left-image" %>
-      <%= image_tag @comic.images[index * 2], class: "right-image" %>
+  <div id="carouselExampleControls" class="carousel slide">
+    <div class="carousel-inner">
+      <% if ((@comic.images.size().to_f / 2).round % 2) == 0 %>
+        <% (@comic.images.size().to_f / 2).round.times do |index| %>
+          <div class="carousel-item active spread-image">
+            <%= image_tag @comic.images[index * 2 + 1], class: "d-block w-50 left-image" %>
+            <%= image_tag @comic.images[index * 2], class: "d-block w-50 right-image" %>
+          </div>
+        <% end %>
+      <% else %>
+        <% (@comic.images.size().to_f / 2).round.times do |index| %>
+          <% if ((@comic.images.size().to_f / 2).round - 1) == index %>
+            <div class="carousel-item active spread-image">
+              <img src="black.jpeg" class="d-block w-50 left-image">
+              <%= image_tag @comic.images[index * 2], class: "d-block w-50 right-image" %>
+            </div>
+          <% else %>
+            <div class="carousel-item active spread-image">
+              <%= image_tag @comic.images[index * 2 + 1], class: "d-block w-50 left-image" %>
+              <%= image_tag @comic.images[index * 2], class: "d-block w-50 right-image" %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
+    <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">前へ</span>
+    </button>
+    <button type="button" class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">次へ</span>
+    </button>
+  </div>
 </div>
 
 <div class="comic-show-mobile">
