@@ -1,0 +1,16 @@
+<div class="comic-show-desktop">
+  <% (@comic.images.size() / 2).round.times do |index| %>
+    <div class="spread-image">
+      <%= image_tag @comic.images[index * 2 + 1], class: "left-image" %>
+      <%= image_tag @comic.images[index * 2], class: "right-image" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="comic-show-mobile">
+  <% @comic.images.each do |image| %>
+    <div class="spread-image">
+      <%= image_tag image, class: "image" %>
+    </div>
+  <% end %>
+</div>

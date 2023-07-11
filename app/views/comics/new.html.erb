@@ -16,8 +16,9 @@
       <div class="main-file">
         <%= form.label :"新巻絵(下スクロール)", class: "main-label" %>
         <div id="previews"></div>
-        <div class="main-form-image">
-          <%= form.file_field :images, name: "comic[images][]", data: {index: 0} %>
+        <div class="mb-3">
+          <%= label_tag "formFileMultiple", "複数ファイル選択の例", class: "form-label" %>
+          <%= form.file_field :images, multiple: true, class: "form-control", id: "formFileMultiple" %>
         </div>
       </div>
     </div>
