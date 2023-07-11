@@ -95,17 +95,16 @@
     display: flex;
     justify-content: center;
     background-color: black;
-    margin: 10px;
   }
   
   .comic-show-desktop .spread-image .left-image {
-    width: 370px;
-    height: auto;
+    width: auto;
+    height: 90vh;
     margin-right: 5px;
   }
 
   .comic-show-desktop .spread-image .right-image {
-    width: 370px;
-    height: auto;
+    width: auto;
+    height: 90vh;
   }
 }
