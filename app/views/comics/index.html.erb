@@ -6,7 +6,7 @@
     <%= content_tag :div, @work.explanation, class: "comic-explanation" %>
   </div>
   <% @comics.each_with_index do |comic, i| %>
-    <%= link_to root_path, class: "comic-part" do %>
+    <%= link_to work_comic_path(id: comic), class: "comic-part" do %>
       <%= image_tag comic.images[0], class: "comic-image" %>
       <%= "[第" + (i + 1).to_s + "話]" + comic.subtitle %>
     <% end %>

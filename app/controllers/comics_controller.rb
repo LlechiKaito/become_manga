@@ -16,8 +16,13 @@ class ComicsController < ApplicationController
         if @comic.save
             redirect_to work_comics_path(@work)
         else
-            render "comics#new"
+            render "new"
         end
+    end
+
+    def show
+        @comic = Comic.find(params[:id])
+        images = @comic.images
     end
 
     private

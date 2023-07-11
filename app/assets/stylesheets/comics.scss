@@ -58,3 +58,54 @@
   width: 20%;
 }
 
+/* スマートフォン用のスタイル */
+@media (max-width: 767px) {
+  /* 767px以下の場合に適用されるスタイル */
+  .comic-show-desktop{
+    display: none;
+  }
+
+  .comic-show-mobile{
+  }
+  
+  .comic-show-mobile .spread-image {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    margin:  10px;
+  }
+  
+  .comic-show-mobile .spread-image .image {
+    width: 370px;
+    height: auto;
+  }
+}
+
+/* パソコン用のスタイル */
+@media (min-width: 768px) {
+  /* 768px以上の場合に適用されるスタイル */
+  .comic-show-mobile{
+    display: none;
+  }
+
+  .comic-show-desktop{
+  }
+  
+  .comic-show-desktop .spread-image {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    margin: 10px;
+  }
+  
+  .comic-show-desktop .spread-image .left-image {
+    width: 370px;
+    height: auto;
+    margin-right: 5px;
+  }
+
+  .comic-show-desktop .spread-image .right-image {
+    width: 370px;
+    height: auto;
+  }
+}
