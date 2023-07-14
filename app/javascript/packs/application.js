@@ -14,6 +14,7 @@ require("../main_form")
 require("../my_page")
 require("../empty_add")
 require("../preview")
+require("../image")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
