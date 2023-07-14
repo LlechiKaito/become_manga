@@ -91,20 +91,22 @@
   .comic-show-desktop{
   }
   
-  .comic-show-desktop .spread-image {
+  .comic-show-desktop .page {
     display: flex;
     justify-content: center;
     background-color: black;
   }
   
-  .comic-show-desktop .spread-image .left-image {
-    width: auto;
-    height: 90vh;
+  .comic-show-desktop .left-wrapper {
     margin-right: 5px;
   }
 
-  .comic-show-desktop .spread-image .right-image {
-    width: auto;
-    height: 90vh;
+  .comic-show-desktop .right-wrapper {
   }
+
+  .comic-show-desktop .image{
+    height: 90vh;
+    width: auto;
+  }
+  
 }
