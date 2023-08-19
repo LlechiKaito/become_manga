@@ -57,56 +57,52 @@
   height: auto;
   width: 20%;
 }
-
-/* スマートフォン用のスタイル */
-@media (max-width: 767px) {
-  /* 767px以下の場合に適用されるスタイル */
-  .comic-show-desktop{
-    display: none;
-  }
-
-  .comic-show-mobile{
-  }
   
-  .comic-show-mobile .spread-image {
-    display: flex;
-    justify-content: center;
-    background-color: black;
-    margin:  10px;
-  }
-  
-  .comic-show-mobile .spread-image .image {
-    width: 370px;
-    height: auto;
-  }
+// 576未満
+.comic-show-desktop{
+  display: none;
 }
 
-/* パソコン用のスタイル */
-@media (min-width: 768px) {
-  /* 768px以上の場合に適用されるスタイル */
+.comic-show-mobile{
+  display: block;
+}
+
+.comic-show-mobile .mobile-image{
+  height: 90vh;
+  width: auto;
+  
+}
+
+.comic-show-mobile .mobile-change-image{
+  height: auto;
+  width: 100%;
+}
+
+/* 小デバイス（横向きモバイル, 576px 以上） */
+@media (min-width: 576px) {
   .comic-show-mobile{
     display: none;
   }
 
   .comic-show-desktop{
-  }
-  
-  .comic-show-desktop .page {
-    display: flex;
-    justify-content: center;
-    background-color: black;
-  }
-  
-  .comic-show-desktop .left-wrapper {
-    margin-right: 5px;
+    display: block;
   }
 
-  .comic-show-desktop .right-wrapper {
+  .comic-show-desktop .left-wrapper {
+    margin-right: 5px;
   }
 
   .comic-show-desktop .image{
     height: 90vh;
     width: auto;
   }
-  
+
+  .comic-show-desktop .changeImage{
+    width: calc(100% - 2.5px);
+    height: auto;
+  }
+
+  .comic-show-desktop .left{
+    float: right;
+  }
 }
