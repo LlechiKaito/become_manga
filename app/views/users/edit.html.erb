@@ -1,3 +1,12 @@
+<header>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.css"
+    integrity="sha512-C4k/QrN4udgZnXStNFS5osxdhVECWyhMsK1pnlk+LkC7yJGCqoYxW4mH3/ZXLweODyzolwdWSqmmadudSHMRLA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.js"
+      integrity="sha512-LjPH94gotDTvKhoxqvR5xR2Nur8vO5RKelQmG52jlZo7SwI5WLYwDInPn1n8H9tR0zYqTqfNxWszUEy93cHHwg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</header>
+
 <h2 class = "form-title">ユーザー情報変更</h2>
 
 <%= form_with(model: @user, local: true) do |f| %>
@@ -5,8 +14,26 @@
   <div class = "registration-form">
   
     <div class="edit-form">
-      <%= f.file_field :image, class: "edit-form-image" %>
+        <%= f.file_field :image, class: "edit-form-image", id:"image_input"%>
     </div>
+
+    <div id="image_preview" class="row justify-content-evenly">
+      <div class="col-5">
+        <img id="target" src="" class="w-100">
+      </div>
+      <div class="col-5">
+        <p>プレビュー</p>
+        <img id='preview' class='w-100'>
+      </div>
+    </div>
+
+    <div id="cropper_controls" style="display: none;">
+      <div>
+        <button type="button" id="crop_button">Crop</button>
+      </div>
+    </div>
+
+    <%= f.hidden_field :cropped_image_data, id: "cropped_image_data"%>
 
     <div class="field">
       <%= f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", class: "field-form" %>
@@ -20,4 +47,39 @@
       <%= f.submit "プロフィール情報変更" %>
     </div>
   </div>
+
+<script>
+  document.getElementById("image_input").addEventListener("change", function (e) {
+    const preview = document.getElementById("image_preview");
+    const cropperControls = document.getElementById("cropper_controls");
+    const targetImg = document.getElementById("target");
+    const cropButton = document.getElementById("crop_button");
+    const croppedPreview = document.getElementById("preview")
+    let cropper;
+    preview.style.display = "flex"
+
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        targetImg.src = event.target.result;
+        cropperControls.style.display = "block"; // クロップコントロールを表示
+        cropper = new Cropper(targetImg, {aspectRatio: 2 / 1});
+      }
+      reader.readAsDataURL(file);
+      document.getElementById("crop_button").addEventListener("click", function(){
+        let canvas = cropper.getCroppedCanvas();
+        let croppedImageData = canvas.toDataURL();
+
+        croppedPreview.src = croppedImageData;
+        document.getElementById("cropped_image_data").value = croppedImageData;
+      });
+    } else {
+      targetImg.src = ""; // ファイルが未選択の場合はプレビューをクリア
+      preview.style.display = "none"; // プレビューコンテナを非表示
+      cropperControls.style.display = "none"; // クロップコントロールを非表示
+    }
+  });
+</script>
+
 <% end %>

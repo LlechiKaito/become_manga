@@ -23,41 +23,37 @@
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">オフキャンバス</h5>
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">メニュー</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="閉じる"></button>
           </div>
           <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <div class="user-admin nav-link">
+            <div class="navbar-nav justify-content-end flex-grow-1 pe-3">
                   <%if user_signed_in? %>
-                  <%= link_to "マイページ", user_path(current_user), class: "login" %>
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "registration" %>
+                    <div class="row">
+                      <div class="col-5">
+                        <%= link_to "マイページ", user_path(current_user), class: "login" %>
+                      </div>
+                      <div class="col-5">
+                        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "registration" %>
+                      </div>
+                    </div>
                   <% else %>
-                  <%= link_to "ログイン", new_user_session_path, class: "login" %>
-                  <%= link_to "新規登録", new_user_registration_path, class: "registration" %>
+                    <div class="row">
+                      <div class="col-5">
+                        <%= link_to "ログイン", new_user_session_path, class: "login" %>
+                      </div>
+                      <div class="col-5">
+                        <%= link_to "新規登録", new_user_registration_path, class: "registration" %>
+                      </div>
+                    </div>
                   <% end %>
-                </div>
-              </li>
-              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <%= link_to "新規漫画作成", new_work_path(), class: "nav-link" %>
-              </li>
-              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <%= link_to "作成済み漫画一覧", works_path(), class: "nav-link" %>
-              </li>
-              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <%= link_to "追加漫画作成", "#", class: "nav-link" %>
-              </li>
-              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <%= link_to "マイプロフィール", "#", class: "nav-link", id: "my-profile", remote: true %>
-              </li>
-              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <%= link_to "ブックマーク一覧", book_marks_path(), class: "nav-link" %>
-              </li>
-              <li class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <%= link_to "お問い合わせ", new_inquiry_path(), class: "nav-link" %>
-              </li>
-            </ul>
+            </div>
           </div>
         </div>
       </div>
