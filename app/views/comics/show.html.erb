@@ -1,5 +1,5 @@
 <div class="comic-show-desktop">
-  <div id="carouselExampleControls" class="carousel slide">
+  <div id="carouselExampleControls" class="carousel slide" data-bs-wrap="false">
     <div class="carousel-inner">
       <% if ((@comic.images.size().to_f / 2) % 2) == 0 %>
         <% ((@comic.images.size().to_f / 2).round - 1).downto(0) do |index| %>
@@ -88,9 +88,9 @@
 
 
 <div class="comic-show-mobile">
-  <div id="carouselExampleControls-mobile" class="carousel slide">
+  <div id="carouselExampleControls-mobile" class="carousel slide" data-bs-wrap="false">
     <div class="carousel-inner">
-      <% @comic.images.size().times do |index| %>
+      <% (@comic.images.size() - 1).downto(0) do |index| %>
         <% if index == 0 %>
           <div class="carousel-item active">
             <div class="d-flex justify-content-center bg-dark">
