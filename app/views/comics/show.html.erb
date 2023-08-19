@@ -5,23 +5,23 @@
         <% ((@comic.images.size().to_f / 2).round - 1).downto(0) do |index| %>
           <% if index == 0 %>
             <div class="carousel-item active">
-              <div class="page">
-                <div class="left-wrapper">
-                  <%= image_tag @comic.images[index * 2 + 1], class: "image", id: "left-image" %>
+              <div class="d-flex justify-content-center bg-dark">
+                <div class="col-6 left-wrapper">
+                  <%= image_tag @comic.images[index * 2 + 1], class: "left image", id: "comic-image" %>
                 </div>
-                <div class="right-wrapper">
-                  <%= image_tag @comic.images[index * 2], class: "image", id: "right-image" %>
+                <div class="col-6">
+                  <%= image_tag @comic.images[index * 2], class: "image", id: "comic-image" %>
                 </div>
               </div>
             </div>
           <% else %>
             <div class="carousel-item">
-              <div class="page">
-                <div class="left-wrapper">
-                  <%= image_tag @comic.images[index * 2 + 1], class: "image" %>
+              <div class="d-flex justify-content-center bg-dark">
+                <div class="col-6 left-wrapper">
+                  <%= image_tag @comic.images[index * 2 + 1], class: "left image", id: "comic-image" %>
                 </div>
-                <div class="right-wrapper">
-                  <%= image_tag @comic.images[index * 2], class: "image" %>
+                <div class="col-6">
+                  <%= image_tag @comic.images[index * 2], class: "image", id: "comic-image" %>
                 </div>
               </div>
             </div>
@@ -31,43 +31,43 @@
         <% ((@comic.images.size().to_f / 2).round - 1).downto(0) do |index| %>
           <% if ((@comic.images.size().to_f / 2).round) == 1 %>
             <div class="carousel-item active">
-              <div class="page">
-                <div class="left-wrapper">
+              <div class="d-flex justify-content-center bg-dark">
+                <div class="col-6 left-wrapper">
                 </div>
-                <div class="right-wrapper">
-                  <%= image_tag @comic.images[index * 2], class: "image", id: "right-image" %>
+                <div class="col-6">
+                  <%= image_tag @comic.images[index * 2], class: "image", id: "comic-image" %>
                 </div>
               </div>
             </div>
           <% elsif ((@comic.images.size().to_f / 2).round - 1) == index %>
             <div class="carousel-item">
-              <div class="page">
-                <div class="left-wrapper">
+              <div class="d-flex justify-content-center bg-dark">
+                <div class="col-6 left-wrapper">
                 </div>
-                <div class="right-wrapper">
-                  <%= image_tag @comic.images[index * 2], class: "image" %>
+                <div class="col-6">
+                  <%= image_tag @comic.images[index * 2], class: "image", id: "comic-image"  %>
                 </div>
               </div>
             </div>
           <% elsif index == 0 %>
             <div class="carousel-item active">
-              <div class="page">
-                <div class="left-wrapper">
-                  <%= image_tag @comic.images[index * 2 + 1], class: "image", id: "left-image" %>
+              <div class="d-flex justify-content-center bg-dark">
+                <div class="col-6 left-wrapper">
+                  <%= image_tag @comic.images[index * 2 + 1], class: "left image", id: "comic-image" %>
                 </div>
-                <div class="right-wrapper">
-                  <%= image_tag @comic.images[index * 2], class: "image", id: "right-image" %>
+                <div class="col-6">
+                  <%= image_tag @comic.images[index * 2], class: "image", id: "comic-image" %>
                 </div>
               </div>
             </div>
           <% else %>
             <div class="carousel-item">
-              <div class="page">
-                <div class="left-wrapper">
-                  <%= image_tag @comic.images[index * 2 + 1], class: "image" %>
+              <div class="d-flex justify-content-center bg-dark">
+                <div class="col-6 left-wrapper">
+                  <%= image_tag @comic.images[index * 2 + 1], class: "left image", id: "comic-image" %>
                 </div>
-                <div class="right-wrapper">
-                  <%= image_tag @comic.images[index * 2], class: "image" %>
+                <div class="col-6">
+                  <%= image_tag @comic.images[index * 2], class: "image", id: "comic-image"  %>
                 </div>
               </div>
             </div>
@@ -86,10 +86,33 @@
   </div>
 </div>
 
+
 <div class="comic-show-mobile">
-  <% @comic.images.each do |image| %>
-    <div class="spread-image">
-      <%= image_tag image, class: "image" %>
+  <div id="carouselExampleControls" class="carousel slide">
+    <div class="carousel-inner">
+      <% @comic.images.size().times do |index| %>
+        <% if index == 0 %>
+          <div class="carousel-item active">
+            <div class="d-flex justify-content-center bg-dark">
+              <%= image_tag @comic.images[index], class: "mobile-image", id: "mobile-image" %>
+            </div>
+          </div>
+        <% else %>
+          <div class="carousel-item">
+            <div class="d-flex justify-content-center bg-dark">
+              <%= image_tag @comic.images[index], class: "mobile-image", id: "mobile-image" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-  <% end %>
+    <button type="button" class="carousel-control-prev" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">前へ</span>
+    </button>
+    <button type="button" class="carousel-control-next" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">次へ</span>
+    </button>
+  </div>
 </div>
