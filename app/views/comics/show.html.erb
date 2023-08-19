@@ -1,7 +1,7 @@
 <div class="comic-show-desktop">
   <div id="carouselExampleControls" class="carousel slide" data-bs-wrap="false">
     <div class="carousel-inner">
-      <% if ((@comic.images.size().to_f / 2) % 2) == 0 %>
+      <% if (@comic.images.size().to_f % 2) == 0 %>
         <% ((@comic.images.size().to_f / 2).round - 1).downto(0) do |index| %>
           <% if index == 0 %>
             <div class="carousel-item active">
