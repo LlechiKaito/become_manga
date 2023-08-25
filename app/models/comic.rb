@@ -11,8 +11,10 @@ class Comic < ApplicationRecord
   def validate_image_count
     errors.add(:images, "は1枚以上50枚以下にしてください") if images.length < 1 || images.length > 50
   end
+  validates :subtitle, presence: true
   validates :subtitle, length: { minimum: 1, maximum: 100, message: "は1文字以上100文字以下にしてください" }
   validates :work_id, presence: true
+  validates :explanation, presence: true
   validates :explanation, length: { minimum: 1, maximum: 70000, message: "は1文字以上70000文字以下にしてください" }
 
     # @comic = Comic.find(params[:id])
