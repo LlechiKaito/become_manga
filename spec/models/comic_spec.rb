@@ -16,7 +16,7 @@ RSpec.describe Comic, type: :model do
       it "subtitleが空では登録できない場合" do
         @comic.subtitle = ''
         @comic.valid?
-        expect(@comic.errors.full_messages).to include("Subtitle は1文字以上100文字以下にしてください")
+        expect(@comic.errors.full_messages).to include("Subtitle can't be blank")
       end
       it "subtitleが101字以上では登録できない場合" do
         @comic.subtitle = Faker::Lorem.characters(number: 101)
@@ -31,7 +31,7 @@ RSpec.describe Comic, type: :model do
       it "explanationが空では登録できない場合" do
         @comic.explanation = ''
         @comic.valid?
-        expect(@comic.errors.full_messages).to include("Explanation は1文字以上70000文字以下にしてください")
+        expect(@comic.errors.full_messages).to include("Explanation can't be blank")
       end
       it "explanationが70001字以上では登録できない場合" do
         @comic.explanation = Faker::Lorem.characters(number: 70001)
