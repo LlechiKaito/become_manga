@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_30_081232) do
+ActiveRecord::Schema.define(version: 2023_08_31_125230) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 2023_05_30_081232) do
     t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
 
+  create_table "nices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "comic_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comic_id"], name: "index_nices_on_comic_id"
+    t.index ["user_id"], name: "index_nices_on_user_id"
+  end
+
   create_table "read_counts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "comic_id", null: false
@@ -96,6 +105,7 @@ ActiveRecord::Schema.define(version: 2023_05_30_081232) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "evaluation"
     t.index ["user_id"], name: "index_works_on_user_id"
   end
 
@@ -104,6 +114,8 @@ ActiveRecord::Schema.define(version: 2023_05_30_081232) do
   add_foreign_key "book_marks", "works"
   add_foreign_key "comics", "works"
   add_foreign_key "inquiries", "users"
+  add_foreign_key "nices", "comics"
+  add_foreign_key "nices", "users"
   add_foreign_key "read_counts", "comics"
   add_foreign_key "read_counts", "users"
   add_foreign_key "works", "users"
