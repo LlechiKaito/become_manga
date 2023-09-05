@@ -23,7 +23,23 @@
 }
 
 .comic-index-body{
+  margin: 20px;
+}
 
+.comic-index-body .new-link{
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  border-radius: 20px;
+  padding: 10px;
+  text-decoration: none;
+  color: blue;
+  background-color: rgb(243, 241, 241);
+  height: 130px;
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .comic-main{

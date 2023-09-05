@@ -10,9 +10,9 @@ class WorksController < ApplicationController
       @works = Work.page(params[:page])
     else
       if params[:category_id] == "1" || params[:category_id].nil? 
-        @works = Work.where("user_id = ? ", current_user.id).page(params[:page])
+        @works = Work.where(user_id: current_user.id).order(evaluation: :desc).page(params[:page])
       else  
-        @works = Work.where("category_id = ? ", params[:category_id]).where("user_id = ? ", current_user.id).page(params[:page])
+        @works = Work.where("category_id = ? ", params[:category_id]).order(evaluation: :desc).page(params[:page])
       end
     end
 
@@ -36,6 +36,7 @@ class WorksController < ApplicationController
   private
 
   def work_params
-    params.require(:work).permit(:main_title, :image, :explanation, :category_id).merge(user_id: current_user.id)
+    # カラムの追加を行なった！確認よろ！
+    params.require(:work).permit(:main_title, :image, :explanation, :category_id).merge(user_id: current_user.id, evaluation: 0)
   end
 end

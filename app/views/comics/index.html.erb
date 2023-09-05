@@ -10,6 +10,21 @@
       <%= image_tag comic.images[0], class: "comic-image" %>
       <%= "[第" + (i + 1).to_s + "話]" + comic.subtitle %>
     <% end %>
+
+    <% if user_signed_in? %>
+      <% unless comic.nices.find_by(user_id: current_user[:id]) %>
+        <%= link_to nices_path(id: comic.id), method: :post, class: 'stretched-link' do %>
+          <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>いいね登録</button>
+        <% end %>
+      <% else %>
+        <%= link_to nice_path(comic.nices.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
+          <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>いいね削除</button>
+        <% end %>
+      <% end %>
+    <% end %>
+    
+  <% end %>
+  <% if user_signed_in? && current_user == @work.user %>
+    <%= link_to "新話作成", new_work_comic_path(@work), class: "new-link" %>
   <% end %>
 </div>
-<%= link_to "新規漫画作成", new_work_comic_path(@work) %>

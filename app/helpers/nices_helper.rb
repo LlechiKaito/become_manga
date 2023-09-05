@@ -1,0 +1,2 @@
+module NicesHelper
+end
