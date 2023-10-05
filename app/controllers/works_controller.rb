@@ -10,9 +10,9 @@ class WorksController < ApplicationController
       @works = Work.page(params[:page])
     else
       if params[:category_id] == "1" || params[:category_id].nil? 
-        @works = Work.where(user_id: current_user.id).order(evaluation: :desc).page(params[:page])
+        @works = Work.order(evaluation: :desc).page(params[:page])
       else  
-        @works = Work.where("category_id = ? ", params[:category_id]).order(evaluation: :desc).page(params[:page])
+        @works = Work.where(category_id: params[:category_id]).order(evaluation: :desc).page(params[:page])
       end
     end
 
