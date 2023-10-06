@@ -1,13 +1,47 @@
-<%# 横に三つずつ表示されるようになってます。 %>
-<div class="book-mark-wrap">
-  <% @works.each do |work| %>
-    <div class="book-mark-part">
-      <%= content_tag :div, work.category.name + "マンガ", class: "book-mark-category" %>
-      <%= image_tag(work.image, class: "book-mark-image") %>
-      <%= content_tag :div, work.main_title, class: "book-mark-main-title" %>
-      <%= content_tag :div, work.user.nickname, class: "book-mark-user-name" %>
-      <%# 作成した日時を表示してます。更新ではないことに注意 %>
-      <%= content_tag :div, work.created_at.strftime('%Y/%m/%d'), class: "book-mark-time" %>
-    </div>
+<div class="selecter">
+  <!-- 漫画ソート用のプルダウンメニュー.':category_id'に選択したカテゴリーのidが格納されてindex再読み込み. -->
+  <!-- submitはjsで自動化できるっぽい. -->
+  <%= form_tag works_path, method: :get do %>
+    <%= select_tag :category_id, options_from_collection_for_select(@category, :id, :name, @selected ), include_blank: false, class: 'selectbox'%>
+    <%= submit_tag "Filter" %>
   <% end %>
+  <!-- ソートされたカテゴリーの作品投稿数表示 -->
+  <%# <div>投稿数: <%= @works.total_count</div> %>
 </div>
+
+  <!-- 漫画表示部分.ほぼflexboxにおまかせ -->
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3  g-2" id="wrapper">
+    <% @book_marks.each do |book_mark| %>
+      <div class="col">
+        <div class="card">
+          <div class='position-relative'>
+            <%= link_to work_comics_path(work_id: book_mark.work.id), class: 'stretched-link' do %>
+              <%= image_tag(book_mark.work.image, class: "card-img object-fit-contain", style: "height:262px;") %>
+            <% end %>
+        </div>
+          <div class="card-img-overlay d-flex flex-column">
+            <div class="card-title"><%= book_mark.work.main_title %></div>
+            <div class="card-subtitle mh-50"><small class="text-body-secondary"><%= book_mark.work.category.name %></small></div>
+          </div>
+                    
+          <div class="card-footer mt-auto position-relative">
+            <% if user_signed_in? %>
+              <% unless book_mark.work.book_marks.find_by(user_id: current_user[:id]) %>
+                <%= link_to book_marks_path(id: book_mark.work.id), method: :post, class: 'stretched-link' do %>
+                  <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
+                <% end %>
+              <% else %>
+                <%= link_to book_mark_path(book_mark.work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
+                  <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= paginate @book_marks %>
