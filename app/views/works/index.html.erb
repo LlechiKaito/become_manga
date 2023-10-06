@@ -16,34 +16,35 @@
     <!-- 漫画表示部分.ほぼflexboxにおまかせ -->
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3  g-2" id="wrapper">
-            <% @works.each do |work| %>
-            <div class="col">
-                <div class="card">
-                    <div class='position-relative'>
-                    <%= link_to work_comics_path(work_id: work.id), class: 'stretched-link' do %>
-                    <%= image_tag(work.image, class: "card-img object-fit-contain", style: "height:262px;") %>
-                    <% end %>
-                    </div>
-                    <div class="card-img-overlay d-flex flex-column">
-                        <div class="card-title"><%= work.main_title %></div>
-                        <div class="card-subtitle mh-50"><small class="text-body-secondary"><%= work.category.name %></small></div>
-                    </div>
-                    
-                    <div class="card-footer mt-auto position-relative">
-                        <% if user_signed_in? %>
-                            <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
-                                <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
-                                    <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
-                                <% end %>
-                            <% else %>
-                                <%= link_to book_mark_path(work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
-                                    <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+            <% @works.each_with_index do |work, i| %>
+                <div class="col">
+                    <div><%= i + 1 %></div>
+                    <div class="card">
+                        <div class='position-relative'>
+                        <%= link_to work_comics_path(work_id: work.id), class: 'stretched-link' do %>
+                        <%= image_tag(work.image, class: "card-img object-fit-contain", style: "height:262px;") %>
+                        <% end %>
+                        </div>
+                        <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-title"><%= work.main_title %></div>
+                            <div class="card-subtitle mh-50"><small class="text-body-secondary"><%= work.category.name %></small></div>
+                        </div>
+                        
+                        <div class="card-footer mt-auto position-relative">
+                            <% if user_signed_in? %>
+                                <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
+                                    <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
+                                        <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
+                                    <% end %>
+                                <% else %>
+                                    <%= link_to book_mark_path(work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
+                                        <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+                                    <% end %>
                                 <% end %>
                             <% end %>
-                        <% end %>
+                        </div>
                     </div>
                 </div>
-            </div>
             <% end %>
         </div>
     </div>
