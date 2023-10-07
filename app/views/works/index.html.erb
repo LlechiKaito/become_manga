@@ -1,24 +1,127 @@
-<body>
-    <!-- 
+<!-- 
 ページ最上部に表示するメニュー的なもの.headerにしても良かったけど
 -->
-    <div class="selecter">
-        <!-- 漫画ソート用のプルダウンメニュー.':category_id'に選択したカテゴリーのidが格納されてindex再読み込み. -->
-        <!-- submitはjsで自動化できるっぽい. -->
-        <%= form_tag works_path, method: :get do %>
-        <%= select_tag :category_id, options_from_collection_for_select(@category, :id, :name, @selected ), include_blank: false, class: 'selectbox'%>
-        <%= submit_tag "Filter" %>
-        <% end %>
-        <!-- ソートされたカテゴリーの作品投稿数表示 -->
-        <div>投稿数: <%= @works.total_count%></div>
-    </div>
+<div id="selecter" class="selecter">
+    <!-- 漫画ソート用のプルダウンメニュー.':category_id'に選択したカテゴリーのidが格納されてindex再読み込み. -->
+    <!-- submitはjsで自動化できるっぽい. -->
+    <%= form_tag works_path, method: :get do %>
+    <%= select_tag :category_id, options_from_collection_for_select(@category, :id, :name, @selected ), include_blank: false, class: 'selectbox'%>
+    <% end %>
+    <!-- ソートされたカテゴリーの作品投稿数表示 -->
+    <div>投稿数: <%= @works.total_count%></div>
+</div>
 
-    <!-- 漫画表示部分.ほぼflexboxにおまかせ -->
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3  g-2" id="wrapper">
-            <% @works.each_with_index do |work, i| %>
+<!-- 漫画表示部分.ほぼflexboxにおまかせ -->
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3  g-2" id="wrapper">
+        <% @works.each_with_index do |work, index| %>
+            <!-- top3特殊表示 -->
+            <% if params[:page].to_i * 15 + index == 0 %>
+            <div class="col">
+                <div class="card">
+                    <div class='position-relative'>
+                        <%= link_to work_comics_path(work_id: work.id), class: 'stretched-link' do %>
+                        <%= image_tag(work.image, class: "card-img object-fit-contain", style: "height:262px;") %>
+                        <% end %>
+                    </div>
+                    <div class="card-img-overlay d-flex flex-column">
+                        <div class="card-title"><%= work.main_title %></div>
+                        <div class="card-subtitle mh-50">
+                            <small class="text-body-secondary"><%= work.category.name %></small>
+                            <small class="text-body-secondary"><%= work.evaluation %></small>
+                        </div>
+                    </div>
+
+                    <div class="card-footer mt-auto position-relative">
+                        <% if user_signed_in? %>
+                        <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
+                        <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
+                        <button type='button'
+                            class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
+                        <% end %>
+                        <% else %>
+                        <%= link_to book_mark_path(work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
+                        <button type='button'
+                            class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+                        <% end %>
+                        <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+
+            <% if params[:page].to_i * 15 + index == 1 %>
+            <div class="col">
+                <div class="card">
+                    <div class='position-relative'>
+                        <%= link_to work_comics_path(work_id: work.id), class: 'stretched-link' do %>
+                        <%= image_tag(work.image, class: "card-img object-fit-contain", style: "height:262px;") %>
+                        <% end %>
+                    </div>
+                    <div class="card-img-overlay d-flex flex-column">
+                        <div class="card-title"><%= work.main_title %></div>
+                        <div class="card-subtitle mh-50">
+                            <small class="text-body-secondary"><%= work.category.name %></small>
+                            <small class="text-body-secondary"><%= work.evaluation %></small>
+                        </div>
+                    </div>
+
+                    <div class="card-footer mt-auto position-relative">
+                        <% if user_signed_in? %>
+                        <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
+                        <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
+                        <button type='button'
+                            class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
+                        <% end %>
+                        <% else %>
+                        <%= link_to book_mark_path(work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
+                        <button type='button'
+                            class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+                        <% end %>
+                        <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+
+            <% if params[:page].to_i * 15 + index == 2 %>
+            <div class="col">
+                <div class="card">
+                    <div class='position-relative'>
+                        <%= link_to work_comics_path(work_id: work.id), class: 'stretched-link' do %>
+                        <%= image_tag(work.image, class: "card-img object-fit-contain", style: "height:262px;") %>
+                        <% end %>
+                    </div>
+                    <div class="card-img-overlay d-flex flex-column">
+                        <div class="card-title"><%= work.main_title %></div>
+                        <div class="card-subtitle mh-50">
+                            <small class="text-body-secondary"><%= work.category.name %></small>
+                            <small class="text-body-secondary"><%= work.evaluation %></small>
+                        </div>
+                    </div>
+
+                    <div class="card-footer mt-auto position-relative">
+                        <% if user_signed_in? %>
+                        <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
+                        <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
+                        <button type='button'
+                            class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
+                        <% end %>
+                        <% else %>
+                        <%= link_to book_mark_path(work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
+                        <button type='button'
+                            class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+                        <% end %>
+                        <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+
+            <% if params[:page].to_i * 15 + index > 2 %>
                 <div class="col">
-                    <div><%= i + 1 %></div>
                     <div class="card">
                         <div class='position-relative'>
                         <%= link_to work_comics_path(work_id: work.id), class: 'stretched-link' do %>
@@ -27,9 +130,12 @@
                         </div>
                         <div class="card-img-overlay d-flex flex-column">
                             <div class="card-title"><%= work.main_title %></div>
-                            <div class="card-subtitle mh-50"><small class="text-body-secondary"><%= work.category.name %></small></div>
+                            <div class="card-subtitle mh-50">
+                                <small class="text-body-secondary"><%= work.category.name %></small>
+                                <small class="text-body-secondary"><%= work.evaluation %></small>
+                            </div>
                         </div>
-                        
+
                         <div class="card-footer mt-auto position-relative">
                             <% if user_signed_in? %>
                                 <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
@@ -46,11 +152,31 @@
                     </div>
                 </div>
             <% end %>
-        </div>
+        <% end %>
     </div>
+</div>
 
-    <%= paginate @works %>
+<%= paginate @works %>
 
-</body>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+var selecter = document.getElementById("selecter");
+var selectbox = selecter.querySelector(".selectbox");
 
-</html>
+// プルダウンの初期選択値を保存
+var initialSelectedValue = selectbox.value;
+
+selectbox.addEventListener("change", function() {
+selecter.querySelector("form").submit();
+});
+
+// ページがキャッシュから読み込まれたときに、プルダウンの選択内容を復元
+window.addEventListener("pageshow", function(event) {
+if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+// ページ遷移の履歴がある場合、プルダウンの選択内容を初期選択値に戻す
+selectbox.value = initialSelectedValue;
+}
+});
+});
+
+</script>
