@@ -47,6 +47,9 @@
                     </div>
                   <% end %>
                 <%= link_to "新規漫画作成", new_work_path(), class: "nav-link" %>
+                <%= link_to "ランキング", works_path(), class: "nav-link" %>
+                <%= link_to "追加漫画作成", "#", class: "nav-link" %>
+                <%= link_to "マイプロフィール", "#", class: "nav-link", id: "my-profile", remote: true %>
                 <%= link_to "ブックマーク一覧", book_marks_path(), class: "nav-link" %>
                 <%= link_to "お問い合わせ", new_inquiry_path(), class: "nav-link" %>
             </div>
