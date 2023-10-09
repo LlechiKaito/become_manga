@@ -1,12 +1,9 @@
-<div class="selecter">
-  <!-- 漫画ソート用のプルダウンメニュー.':category_id'に選択したカテゴリーのidが格納されてindex再読み込み. -->
-  <!-- submitはjsで自動化できるっぽい. -->
-  <%= form_tag works_path, method: :get do %>
+<div id="selecter" class="selecter">
+    <!-- 漫画ソート用のプルダウンメニュー.':category_id'に選択したカテゴリーのidが格納されてindex再読み込み. -->
+    <!-- submitはjsで自動化できるっぽい. -->
+    <%= form_tag book_marks_path, method: :get do %>
     <%= select_tag :category_id, options_from_collection_for_select(@category, :id, :name, @selected ), include_blank: false, class: 'selectbox'%>
-    <%= submit_tag "Filter" %>
-  <% end %>
-  <!-- ソートされたカテゴリーの作品投稿数表示 -->
-  <%# <div>投稿数: <%= @works.total_count</div> %>
+    <% end %>
 </div>
 
   <!-- 漫画表示部分.ほぼflexboxにおまかせ -->
@@ -45,3 +42,26 @@
 </div>
 
 <%= paginate @book_marks %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+var selecter = document.getElementById("selecter");
+var selectbox = selecter.querySelector(".selectbox");
+
+// プルダウンの初期選択値を保存
+var initialSelectedValue = selectbox.value;
+
+selectbox.addEventListener("change", function() {
+selecter.querySelector("form").submit();
+});
+
+// ページがキャッシュから読み込まれたときに、プルダウンの選択内容を復元
+window.addEventListener("pageshow", function(event) {
+if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+// ページ遷移の履歴がある場合、プルダウンの選択内容を初期選択値に戻す
+selectbox.value = initialSelectedValue;
+}
+});
+});
+
+</script>
