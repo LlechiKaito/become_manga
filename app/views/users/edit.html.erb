@@ -65,7 +65,7 @@
       reader.onload = function (event) {
         targetImg.src = event.target.result;
         cropperControls.style.display = "block"; // クロップコントロールを表示
-        cropper = new Cropper(targetImg, {aspectRatio: 2 / 1});
+        cropper = new Cropper(targetImg, {aspectRatio: 3 / 1});
       }
       reader.readAsDataURL(file);
       document.getElementById("crop_button").addEventListener("click", function(){
