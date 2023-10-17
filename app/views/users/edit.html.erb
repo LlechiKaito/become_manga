@@ -10,70 +10,124 @@
 <h2 class = "form-title">ユーザー情報変更</h2>
 
 <%= form_with(model: @user, local: true) do |f| %>
+  <div class="container">
+    <div class="row justify-content-center">
 
-  <div class = "registration-form">
-  
-    <div class="edit-form">
+      <div class="col-10">
+        <h5 class="my-1">ヘッダー画像</h5>
         <%= f.file_field :ignore_image, class: "edit-form-image", id:"image_input"%>
-    </div>
-
-    <div id="image_preview" class="row justify-content-evenly">
-      <div class="col-5">
-        <img id="target" src="" class="w-100">
       </div>
-      <div class="col-5">
-        <p>プレビュー</p>
-        <img id='preview' class='w-100'>
+
+      <!--設定していない場合グレー画像とか-->
+      <%= image_tag(@user.image, id: "header_preview", class: "h-100 col-10 pb-3") %>
+
+      <div class="modal" id="headerCropModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">ヘッダー画像編集</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="閉じる"></button>
+            </div>
+            <div class="modal-body row">
+              <div id="image_preview" class="justify-content-evenly">
+                <div class="col-6">
+                  <img id="target" src="" class="w-100">
+                </div>
+                <div class="col-6">
+                  <img id='preview' src="" class='w-100'>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="header_close">閉じる</button>
+              <button type="button" class="btn btn-primary" id="header_submit">変更を保存</button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div id="cropper_controls" style="display: none;">
-      <div>
-        <button type="button" id="crop_button">Crop</button>
+      <%= f.hidden_field :image, id: "cropped_image_data"%>
+
+      <div class="col-10 pb-3">
+        <h5 class="my-1">ニックネーム</h5>
+        <%= f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", class: "field-form" %>
       </div>
-    </div>
 
-    <%= f.hidden_field :image, id: "cropped_image_data"%>
+      <div class="col-10 pb-3">
+        <h5 class="my-1">プロフィール</h5></h5>
+        <%= f.text_area :profile, autocomplete: "new-password", placeholder: "プロフィール", class: "field-area" %>
+      </div>
 
-    <div class="field">
-      <%= f.text_field :nickname, autofocus: true, placeholder: "ニックネーム", class: "field-form" %>
-    </div>
-
-    <div class="field">
-      <%= f.text_area :profile, autocomplete: "new-password", placeholder: "プロフィール", class: "field-area" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "プロフィール情報変更" %>
+      <div class="actions">
+        <%= f.submit "プロフィール情報変更" %>
+      </div>
     </div>
   </div>
 
 <script>
   imageElement = document.getElementById("image_input");
+  let cropper = null;
+  const headerCropModal = new bootstrap.Modal(document.getElementById("headerCropModal"));
   imageElement.addEventListener("change", function (e) {
     const preview = document.getElementById("image_preview");
-    const cropperControls = document.getElementById("cropper_controls");
     const targetImg = document.getElementById("target");
-    const cropButton = document.getElementById("crop_button");
     const croppedPreview = document.getElementById("preview")
-    let cropper;
+    let croppedImageData;
     preview.style.display = "flex"
+
+    if(e.target.files[0] == null)
+    {
+      return;
+    }
+
+    headerCropModal.show();
 
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = function (event) {
         targetImg.src = event.target.result;
-        cropperControls.style.display = "block"; // クロップコントロールを表示
         cropper = new Cropper(targetImg, {aspectRatio: 3 / 1});
       }
       reader.readAsDataURL(file);
-      document.getElementById("crop_button").addEventListener("click", function(){
-        let canvas = cropper.getCroppedCanvas();
-        let croppedImageData = canvas.toDataURL();
 
-        croppedPreview.src = croppedImageData;
+      targetImg.addEventListener('ready', function(){
+        let canvas = cropper.getCroppedCanvas();
+        if(canvas !== null)
+        {
+          croppedImageData = canvas.toDataURL();
+
+          croppedPreview.src = croppedImageData;
+        }
+      });
+
+      targetImg.addEventListener('cropend', function(){
+        let canvas = cropper.getCroppedCanvas();
+        if(canvas !== null)
+        {
+          croppedImageData = canvas.toDataURL();
+  
+          croppedPreview.src = croppedImageData;
+        }
+      });
+
+      document.getElementById("header_submit").addEventListener("click", function(){
         document.getElementById("cropped_image_data").value = croppedImageData;
+        document.getElementById("header_preview").src = croppedImageData;
+        cropper.destroy();
+        headerCropModal.hide();
+        canvas = null;
+        croppedImageData = null;
+        imageElement.value = null;
+      });
+
+      document.getElementById("header_close").addEventListener("click", function()
+      {
+        cropper.destroy();
+        headerCropModal.hide();
+        canvas = null;
+        croppedImageData = null;
+        imageElement.value = null;
       });
     } else {
       targetImg.src = ""; // ファイルが未選択の場合はプレビューをクリア
