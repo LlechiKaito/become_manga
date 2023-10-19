@@ -1,16 +1,18 @@
 <div class="my-page">
-  <div class="my-page-header">
-    <%= content_tag :div, user.nickname, class: "my-page-name" %>
+  <div>
+    <% if user.image.attached? %>
+      <%# ここのcss変更しました。違和感がないように %>
+      <%= image_tag(user.image, class: "my-page-image") %>
+    <% else %>
+      <%# ノーイメージを貼る %>
+    <% end %>
     <% if user.id == current_user.id %>
-      <%= link_to "編集", edit_user_path(user), class: "my-page-edit" %>
+    <%= link_to "編集", edit_user_path(user), class: "my-page-edit" %>
     <% end %>
   </div>
-  <% if user.image.attached? %>
-    <%# ここのcss変更しました。違和感がないように %>
-    <%= image_tag(user.image, class: "my-page-image") %>
-  <% else %>
-    <%# ノーイメージを貼る %>
-  <% end %>
+  <div class="my-page-header">
+    <%= content_tag :div, user.nickname, class: "my-page-name" %>
+  </div>
   <h1 class="topic-profile">自己紹介</h1>
   <%= content_tag :div, user.profile, class: "my-page-profile" %>
 </div>

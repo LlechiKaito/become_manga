@@ -1,25 +1,66 @@
-<div>
-  <!--
-  <div class="new-link">
-    <%= link_to "新規漫画作成", new_work_path(), class: "new-link-text" %>
-    <%= link_to "追加漫画作成", "#", class: "new-link-text" %>
-    <%= link_to "作成済み漫画一覧", works_path(), class: "new-link-text-d" %>
+  <div class="container">
+    <div class="row align-items-center">
+      <% if @user.image.attached? %>
+      <%# ここのcss変更しました。違和感がないように %>
+      <%= image_tag(@user.image, class: "my-page-image h-100 m-0 col-12") %>
+      <% else %>
+      <%# ノーイメージを貼る %>
+      <% end %>
+      <div class="col-9 col-md-10 my-1">
+        <%= content_tag :div, @user.nickname, class: "my-page-name" %>
+      </div>
+      <div class="col-3 col-md-2 border rounded-pill my-1 py-1 text-center">
+        <% if @user.id == current_user.id %>
+          <%= link_to "編集", edit_user_path(@user) %>
+        <% elsif current_user.following?(@user) %>
+          <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
+        <% else %>
+          <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
+        <% end %>
+      </div>
+      <div class="mb-3">
+        <%= content_tag :div, @user.profile, class: "col-12" %>
+      </div>
+    </div>
   </div>
-  <div class="new-link">
-    <%= link_to "マイプロフィール", "#", class: "new-link-text", id: "my-profile", remote: true %>
-    <%= link_to "ブックマーク一覧", book_marks_path(), class: "new-link-text-d" %>
-  </div>
-  -->
 
-  <% if current_user.following?(@user) %>
-    <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
-  <% else %>
-    <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
-  <% end %>
-
-  <%# <div id="my-element">csdcdsc</div> %>
-  <div>
-    <%= render partial: 'shared/my-page', locals: { user: @user } %>
-  </div>
   <%#= render partial: 'shared/main-list', locals: { works: @works } %>
-</div>
+  <div class="container">
+    <hr>
+    <h3 class="p-2">投稿作品一覧</h3>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3  g-2" id="wrapper">
+    <% @works.each_with_index do |work, index| %>
+      <div class="col">
+        <div class="card">
+          <div class='position-relative'>
+            <%= link_to work_comics_path(work_id: work.id), class: 'stretched-link' do %>
+            <%= image_tag(work.image, class: "card-img object-fit-contain", style: "height:262px;") %>
+            <% end %>
+          </div>
+          <div class="card-img-overlay d-flex flex-column">
+            <div class="card-title"><%= work.main_title %></div>
+            <div class="card-subtitle mh-50">
+              <small class="text-body-secondary"><%= work.category.name %></small>
+              <small class="text-body-secondary"><%= work.evaluation %></small>
+            </div>
+          </div>
+
+          <div class="card-footer mt-auto position-relative">
+            <% if user_signed_in? %>
+            <% unless work.book_marks.find_by(user_id: current_user[:id]) %>
+            <%= link_to book_marks_path(id: work.id), method: :post, class: 'stretched-link' do %>
+            <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク登録</button>
+            <% end %>
+            <% else %>
+            <%= link_to book_mark_path(work.book_marks.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
+            <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>ブックマーク削除</button>
+            <% end %>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+  <%= paginate @works %>
