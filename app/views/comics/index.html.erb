@@ -13,13 +13,9 @@
 
     <% if user_signed_in? %>
       <% unless comic.nices.find_by(user_id: current_user[:id]) %>
-        <%= link_to nices_path(id: comic.id), method: :post, class: 'stretched-link' do %>
-          <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>いいね登録</button>
-        <% end %>
+        <%= button_to "いいね登録", nices_path(id: comic[:id]), method: :post %>
       <% else %>
-        <%= link_to nice_path(comic.nices.find_by(user_id: current_user[:id])), method: :delete, class: 'stretched-link' do %>
-          <button type='button' class='btn btn-sm btn-outline-secondary position-relative'>いいね削除</button>
-        <% end %>
+        <%= button_to "いいね削除", nice_path(id: comic[:id]), method: :delete %>
       <% end %>
     <% end %>
     
