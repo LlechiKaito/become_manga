@@ -1,12 +1,12 @@
 class Comic < ApplicationRecord
   belongs_to :work
   has_many :comments, dependent: :destroy
-  has_one_attached :image
+  # has_one_attached :image
   has_many_attached :images
   has_many :read_counts, dependent: :destroy
   has_many :nices, dependent: :destroy
 
-  validates :image, presence: true
+  # validates :image, presence: true
   validates :images, presence: true
   validate :validate_image_count
   def validate_image_count
