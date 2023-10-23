@@ -26,7 +26,7 @@ class NicesController < ApplicationController
 
   def destroy
     # 消す予定のブックマークのidを送ってもらう予定
-    @nice = Nice.find(params[:id])
+    @nice = Nice.find_by(user_id: current_user[:id], comic_id: params[:id])
     # saveと挙動はほぼ同じ
     unless @nice.nil?
       @work = Work.find(@nice.comic.work_id)
