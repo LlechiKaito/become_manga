@@ -1,5 +1,6 @@
 class WorksController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new]
+  before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
+  before_action :work_judge, only: [:edit, :update, :destroy]
 
   def index
     #プルダウンメニューにソート中のカテゴリーを表示するようの変数.初回は値が入っていないので'---'を表示
@@ -33,7 +34,35 @@ class WorksController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @work.update(work_params)
+      redirect_to  work_comics_path(work_id: @work[:id])
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    unless @work.nil?
+      @work.destroy
+      redirect_to root_path
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   private
+
+  def work_judge
+    if Work.find(params[:id]).user[:id] == current_user[:id]
+      @work = Work.find(params[:id])
+    else
+      redirect_to root_path
+    end
+  end
 
   def work_params
     # カラムの追加を行なった！確認よろ！

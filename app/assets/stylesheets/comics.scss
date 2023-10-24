@@ -42,7 +42,49 @@
   align-items: center;
 }
 
-.comic-main{
+.comic-main .wrapper{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.comic-main .delete-button{
+  border-radius: 100px;
+  background-color: white;
+  border: 1px solid black;
+  color: blue;
+  width: 80px;
+}
+
+.comic-index-body .delete-button{
+  border-radius: 100px;
+  background-color: white;
+  border: 1px solid black;
+  color: blue;
+  width: 100px;
+}
+
+.comic-index-body .comic-wrapper{
+  display: flex;
+}
+
+.comic-main .edit-button{
+  border-radius: 100px;
+  background-color: white;
+  border: 1px solid black;
+  text-decoration: none;
+  color: blue;
+  width: 80px;
+  text-align: center;
+}
+
+.comic-index-body .edit-button{
+  border-radius: 100px;
+  background-color: white;
+  border: 1px solid black;
+  text-decoration: none;
+  color: blue;
+  width: 100px;
+  text-align: center;
 }
 
 .comic-main-image{
@@ -122,3 +164,4 @@
     float: right;
   }
 }
+
