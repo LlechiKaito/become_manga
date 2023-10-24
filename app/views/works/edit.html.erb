@@ -1,0 +1,28 @@
+<div class="form">
+  <div class="main-new-form">漫画編集</div>
+
+  <%= form_with(model: @work, local: true) do |form| %>
+    <div class="main-form">
+      <%= form.label :"作品タイトル (100文字以内で入力)", class: "main-label" %>
+      <%= form.text_field :main_title, class: "main-form-text", id: "main-text" %>
+    </div>
+    <div class="main-form">
+      <%= form.label :表紙絵, class: "main-label" %>
+      <%= form.file_field :image, class: "main-form-image" %>
+    </div>
+    <div class="main-form">
+      <%= form.label :カテゴリー, class: "main-label" %>
+      <%= form.collection_select(:category_id, Category.all, :id, :name, {}, {class: "main-form-category"}) %>
+    </div>
+    <div classs="main-form">
+      <%= form.label :"説明文 (70000文字以内で入力)", class: "main-label" %>
+      <%= form.text_area :explanation, class: "main-form-area", id: "main-area" %>
+    </div>
+    <div class="main-form">
+      <%= form.submit "編集保存", class: "main-submit" %>
+    </div>
+  <% end %>
+
+  <div class="count", id="title-count">タイトル文字数 : 0字</div>
+  <div class="count", id="explanation-count">説明文文字数 : 0字</div>
+</div>
